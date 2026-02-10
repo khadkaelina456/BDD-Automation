@@ -21,7 +21,7 @@ Feature: Verifying Registration functionality
     And User enters day
     And User enters year
     And User click gender
-    And User enters email
+    And User enters duplicate email
     And User enters password
     And User click on signup button
     Then User should be registered with duplicate email successfully

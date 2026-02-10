@@ -1,0 +1,38 @@
+name: BDD Automation CI with Allure
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+permissions:
+  contents: write    # Required to push to the gh-pages branch
+  pages: write       # Required to deploy to Pages
+  id-token: write    # Required for authentication
+
+jobs:
+  integration:
+    name: Continuous Integration
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.14.3'
+          cache: 'pip'
+
+      - name: Install Dependencies
+        run: |
+          pip install -r requirements.txt
+          pip install flake8 allure-behave
+
+      - name: Run BDD Tests
+        run: |
+       
+          behave -f allure_behave.formatter:AllureFormatter -o allure-results
+
+      

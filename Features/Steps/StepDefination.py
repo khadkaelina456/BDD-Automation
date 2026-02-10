@@ -1,6 +1,7 @@
 from behave import *
 from selenium.webdriver import Chrome
-import time
+from behave.api.pending_step import StepNotImplementedError
+
 
 @given(u'User is on Registration Page')
 def step_impl(context):
@@ -11,15 +12,15 @@ def step_impl(context):
 
 @when(u'User enters firstname')
 def step_impl(context):
-    context.driver.find_element('name', 'firstname').send_keys('Puspa')
+    context.driver.find_element('name', 'firstname').send_keys('Elina')
 
 @when(u'User enters lastname')
 def step_impl(context):
-    context.driver.find_element('name', 'lastname').send_keys('K.C.')
+    context.driver.find_element('name', 'lastname').send_keys('Khadka')
 
 @when(u'User enters month')
 def step_impl(context):
-    context.driver.find_element('xpath', '//select[@name="birthday_month"]').send_keys("Feb")
+    context.driver.find_element('xpath', '//select[@name="birthday_month"]').send_keys("Dec")
 
 @when(u'User enters day')
 def step_impl(context):
@@ -36,11 +37,11 @@ def step_impl(context):
 
 @when(u'User enters email')
 def step_impl(context):
-    context.driver.find_element('xpath', "//input[@name='reg_email__']").send_keys("kanxi@gmail.com")
+    context.driver.find_element('xpath', "//input[@name='reg_email__']").send_keys("eli@gmail.com")
 
 @when(u'User enters password')
 def step_impl(context):
-    context.driver.find_element('xpath', "//input[@name='reg_passwd__']").send_keys("pus123")
+    context.driver.find_element('xpath', "//input[@name='reg_passwd__']").send_keys("elina987ty")
 
 @when(u'User click on signup button')
 def step_impl(context):
@@ -48,12 +49,13 @@ def step_impl(context):
 
 @then(u'User should be registered successfully')
 def step_impl(context):
-    time.sleep(3) # Just to see the result
+   # time.sleep(3) # Just to see the result
     print("Success: Valid Registration Scenario Passed")
-    context.driver.quit()
+    
+@when(u'User enters duplicate email')
+def step_impl(context):
+    raise StepNotImplementedError('User enters duplicate email')
 
 @then(u'User should be registered with duplicate email successfully')
 def step_impl(context):
-    time.sleep(3)
-    print("Success: Duplicate Email Scenario Passed")
-    context.driver.quit()
+  raise StepNotImplementedError('Then User should be registered with duplicate email successfully')
